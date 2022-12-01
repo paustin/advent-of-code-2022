@@ -16,6 +16,6 @@ f = -1 * heappop(heap)
 s = -1 * heappop(heap)
 t = -1 * heappop(heap)
 
-print(f"First three: {f} {s} {t}")
+print(f"First Three: {f} {s} {t}")
 
 print(f"First Three Total: {sum([f, s, t])}")
