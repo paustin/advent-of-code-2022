@@ -30,9 +30,9 @@ def sign_score(me):
     
 def result_score(result):
     scores = {
-        "Z": 6,
         "X": 0,
-        "Y": 3
+        "Y": 3,
+        "Z": 6,
     }
     return scores[result]
 
