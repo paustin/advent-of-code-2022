@@ -1,5 +1,5 @@
 
-def get_the_info_i_need(opp, c2):
+def get_the_info_i_need(opp, col2):
     # returns (game_score_part1, determine_sign)
     d = {
         "A": {
@@ -18,15 +18,15 @@ def get_the_info_i_need(opp, c2):
             "Z": (3, 'X')
         }
     }
-    return d[opp][c2]
+    return d[opp][col2]
 
-def sign_score(me):
+def sign_score(sign):
     scores = {
         "X": 1,
         "Y": 2,
         "Z": 3
     }
-    return scores[me]
+    return scores[sign]
     
 def result_score(result):
     scores = {
@@ -42,14 +42,14 @@ with open("input", "r") as f:
     for line in f.readlines():
         choices = line.strip().split(" ")
         opp = choices[0]
-        c2 = choices[1]
-        p1_score, determined = get_the_info_i_need(opp, c2)
+        col2 = choices[1]
+        p1_score, determined_sign = get_the_info_i_need(opp, col2)
         
         part1_total += p1_score
-        part1_total += sign_score(c2)
+        part1_total += sign_score(col2)
         
-        part2_total += result_score(c2)
-        part2_total += sign_score(determined)
+        part2_total += result_score(col2)
+        part2_total += sign_score(determined_sign)
         
 print(f"Part 1 Total Score: {part1_total}")
 
