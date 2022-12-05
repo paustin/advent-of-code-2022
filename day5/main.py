@@ -2,14 +2,13 @@ import re
 from typing import List, Tuple
 
 def read_starting_pos(lines: List[str]) -> List[List[str]]:
-    crates_regex = r"^(.{3}) (.{3}) (.{3}) (.{3}) (.{3}) (.{3}) (.{3}) (.{3}) (.{3})$"
+    crates_regex = r"^.(.). .(.). .(.). .(.). .(.). .(.). .(.). .(.). .(.).$" # cause lol
     crates = [[], [], [], [], [], [], [], [], []]
     for line in lines:
         matches = re.search(crates_regex, line)
         for j in range(9):
             group = matches.group(j + 1).strip()
             if group:
-                group = group.replace("[", "").replace("]", "")
                 temp = [group]
                 temp.extend(crates[j])
                 crates[j] = temp
