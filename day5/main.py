@@ -26,37 +26,33 @@ def read_move(line: str) -> Tuple[int, int, int]:
     
 def move_crates_p1(lines: List[str], crates: List[List[str]]) -> List[List[str]]:
     for line in lines:
-        m_num, m_from, m_to = read_move(line)     
+        m_num, m_from, m_to = read_move(line)
         for _ in range(m_num):
             moving = crates[m_from].pop()
             crates[m_to].append(moving)
     
     return crates
-            
-with open("input", "r") as f:
-    lines = f.readlines()
-    crates = read_starting_pos(lines[:8])
-    crates = move_crates_p1(lines[10:], crates)
-
-print(f"P1: {[crate[-1] for crate in crates]}")
-
 
 def move_crates_p2(lines: List[str], crates: List[List[str]]) -> List[List[str]]:
     for line in lines:
-        m_num, m_from, m_to = read_move(line)     
+        m_num, m_from, m_to = read_move(line)
+        m_num = m_num * -1 # ease of use for array indexes
 
-        moving = []
-        for _ in range(m_num):
-            moving.append(crates[m_from].pop())
+        moving = crates[m_from][m_num:]
+        crates[m_from] = crates[m_from][:m_num]
             
-        moving.reverse()
         crates[m_to].extend(moving)
     
     return crates
-
+            
 with open("input", "r") as f:
     lines = f.readlines()
-    crates = read_starting_pos(lines[:8])
-    crates = move_crates_p2(lines[10:], crates)
 
-print(f"P2: {[crate[-1] for crate in crates]}")
+crates1 = read_starting_pos(lines[:8])
+crates1 = move_crates_p1(lines[10:], crates1)
+
+crates2 = read_starting_pos(lines[:8])
+crates2 = move_crates_p2(lines[10:], crates2)
+
+print(f"P1: {[crate[-1] for crate in crates1]}")
+print(f"P2: {[crate[-1] for crate in crates2]}")
