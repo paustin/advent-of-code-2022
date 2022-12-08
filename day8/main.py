@@ -21,46 +21,39 @@ height = len(grid)
 width = len(grid[0])
 visible_trees = set()
 
-# trees from left looking right
+# trees from the sides
 for i in range(height):
-    visited = set()
+    visited_l = set()
+    visited_r = set()
     for j in range(width):
-        if j == 0 or grid[i][j] > max(visited):
+        if j == 0 or grid[i][j] > max(visited_l):
             visible_trees.add((i, j))
-        visited.add(grid[i][j])
+        visited_l.add(grid[i][j])
+        if j:
+            if j == 1 or grid[i][-j] > max(visited_r):
+                curr_width = width - j
+                visible_trees.add((i, curr_width))
+            visited_r.add(grid[i][curr_width])
                 
-# trees from right looking left
-for i in range(height):
-    visited = set()
-    for j in range(1, width):
-        if j==1 or grid[i][-j] > max(visited):
-            curr_width = width - j
-            visible_trees.add((i, curr_width))
-        visited.add(grid[i][curr_width])
-                
-# trees from top looking down
+# trees from top and bottom
 for j in range(width):
-    visited = set()
+    visited_a = set()
+    visited_b = set()
     for i in range(height):
-        if i == 0 or grid[i][j] > max(visited):
+        if i == 0 or grid[i][j] > max(visited_a):
             visible_trees.add((i, j))
-        visited.add(grid[i][j])
-
-# trees from bottom looking up
-for j in range(width):
-    visited = set()
-    for i in range(1, height):
-        curr_height = height - i
-        if i == 1 or grid[-i][j] > max(visited):
-            visible_trees.add((curr_height, j))
-        visited.add(grid[curr_height][j])
+        visited_a.add(grid[i][j])
+        if i:
+            curr_height = height - i
+            if i ==1 or grid[-i][j] > max(visited_b):
+                visible_trees.add((curr_height, j))
+            visited_b.add((grid[curr_height][j]))
             
 print(f"P1: {len(visible_trees)}")
     
 # show_visible_trees_only(visible_trees)
 
 most_scenic = 0
-visible_trees = [(47, 78)]
 for i, j in visible_trees:
     tree = grid[i][j]
     tree_score = 1
