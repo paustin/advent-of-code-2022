@@ -7,13 +7,10 @@ class Node:
         self.positions = []
         self.positions.append((self.x, self.y))
         
-    def _add_position(self):
-        self.positions.append((self.x, self.y))
-        
     def move_position(self, x=0, y=0):
         self.x += x
         self.y += y
-        self._add_position()
+        self.positions.append((self.x, self.y))
         
     def move_direction(self, direction):
             if direction == "R":
@@ -44,8 +41,7 @@ class Knot(Node):
             move_y -= 1
         
         self.move_position(move_x, move_y)
-            
-        
+
 with open("input") as f:
     lines = f.readlines()
     
