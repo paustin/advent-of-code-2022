@@ -75,9 +75,5 @@ for line in lines:
             if not knots[i].adjacent(knots[i - 1]):
                 knots[i].move_towards(knots[i - 1])
 
-            
-        
-
 print(f"P1: {len(set(tail.positions))}")
-                
 print(f"P2: {len(set(knots[-1].positions))}")        
