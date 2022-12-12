@@ -1,16 +1,10 @@
 import string
-from typing import List
+from typing import List, Tuple
 
 from dijkstar import Graph, find_path
 
 with open("input") as f:
     lines = f.readlines()
-    
-class Node:
-    def __init__(self, row, col, value):
-        self.row = row
-        self.col = col
-        self.value = value
     
 def char_to_int(char):
     if char == "S":
@@ -19,7 +13,7 @@ def char_to_int(char):
         return char_to_int("z")
     return string.ascii_lowercase.index(char)
 
-grid: List[List[Node]] = []
+grid: List[List[Tuple[int, int, int]]] = []
 start = []
 end = None
 graph = Graph(undirected=True)
@@ -29,7 +23,7 @@ for line in lines:
     for char in line:
         current_height = len(grid)
         current_width = len(row)
-        node = Node(current_height, current_width, char_to_int(char))
+        node = (current_height, current_width, char_to_int(char))
         graph.add_node(node)
         if char == "S":
             temp = [node]
@@ -38,7 +32,7 @@ for line in lines:
         if char == "a":
             start.append(node)
         if char == "E":
-            end = node
+            end = node        
         row.append(node)
     grid.append(row)
     
@@ -63,7 +57,7 @@ for row in range(height):
             graph.add_edge(current, grid[row][right])
             
 def cost_func(u, v, edge, prev_edge):
-    if v.value - u.value <= 1:
+    if v[2] - u[2] <= 1:
         return 1
     return 99999999999999999999999999999999
         
