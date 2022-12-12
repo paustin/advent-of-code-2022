@@ -32,29 +32,21 @@ for line in lines:
         if char == "a":
             start.append(node)
         if char == "E":
-            end = node        
+            end = node
+        
+        # Add up and left edges
+        if current_height > 0:
+            up = grid[current_height - 1][current_width]
+            graph.add_edge(node, (current_height - 1, current_width, up[2]))
+        if current_width > 0:
+            left = row[-1]
+            graph.add_edge(node, (current_height, current_width - 1, left[2]))
+        
         row.append(node)
     grid.append(row)
     
 height = len(grid)
 width = len(grid[0])
-
-for row in range(height):
-    for col in range(width):
-        up = row - 1
-        down = row + 1
-        left = col - 1
-        right = col + 1
-        current = grid[row][col]
-        
-        if 0 <= up < height:
-            graph.add_edge(current, grid[up][col])
-        if 0 <= down < height:
-            graph.add_edge(current, grid[down][col])
-        if 0 <= left < width:
-            graph.add_edge(current, grid[row][left])
-        if 0 <= right < width:
-            graph.add_edge(current, grid[row][right])
             
 def cost_func(u, v, edge, prev_edge):
     if v[2] - u[2] <= 1:
