@@ -64,11 +64,10 @@ dividers = ["[[2]]", "[[6]]"]
 
 packets2.extend(dividers)
 
-def compare(left, right):
-    packet = Packet(left, right)
-    return packet.correct_order()
-
-sorted_packets2 = sorted(packets2, key=functools.cmp_to_key(compare))
+sorted_packets2 = sorted(
+    packets2,
+    key=functools.cmp_to_key(lambda x, y: Packet(x, y).correct_order())
+)
 
 answer = 1
 for i in range(len(sorted_packets2)):
