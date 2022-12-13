@@ -10,7 +10,7 @@ class Packet:
         self.right = json.loads(right)
         
     def _correct_order(self, left, right):
-        # recursive helper function
+        """recursive helper function"""
         try:
             if left < right:
                 return -1
