@@ -18,7 +18,7 @@ class Packet:
                 return 1
             return 0
         except TypeError:
-            # comparing lists and ints is no bueno
+            # comparing lists and ints es no bueno
             pass
         
         if isinstance(left, int):
@@ -68,9 +68,6 @@ packets2 = sorted(
     key=functools.cmp_to_key(lambda x, y: Packet(x, y).correct_order())
 )
 
-answer = 1
-for i in range(len(packets2)):
-    if packets2[i] in dividers:
-        answer *= (i + 1)
+answer = (packets2.index(dividers[0]) + 1) * (packets2.index(dividers[1]) + 1)
 
 print(f"P2: {answer}")
