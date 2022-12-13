@@ -61,17 +61,16 @@ for i in range(len(packets)):
 print(f"P1: {sum}")
 
 dividers = ["[[2]]", "[[6]]"]
-
 packets2.extend(dividers)
 
-sorted_packets2 = sorted(
+packets2 = sorted(
     packets2,
     key=functools.cmp_to_key(lambda x, y: Packet(x, y).correct_order())
 )
 
 answer = 1
-for i in range(len(sorted_packets2)):
-    if sorted_packets2[i] in dividers:
+for i in range(len(packets2)):
+    if packets2[i] in dividers:
         answer *= (i + 1)
 
 print(f"P2: {answer}")
