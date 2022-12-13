@@ -62,8 +62,7 @@ print(f"P1: {sum}")
 
 dividers = ["[[2]]", "[[6]]"]
 
-packets2.append(dividers[0])
-packets2.append(dividers[1])
+packets2.extend(dividers)
 
 def compare(left, right):
     packet = Packet(left, right)
